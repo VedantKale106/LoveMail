@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beautiful Love Quotes</title>
+    <style>
+        /* Apply styles for the body and full-page layout */
+        body {
+            font-family: 'Georgia', serif;
+            line-height: 1.8;
+            color: white; /* Change text color for better visibility */
+            padding: 20px;
+            text-align: center; /* Center align text */
+            position: relative; /* Positioning context for child elements */
+            overflow: hidden; /* Prevent content overflow */
+        }
+
+        /* Set the blurred background image */
+        .background {
+            position: fixed; /* Fix background to the viewport */
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('/static/quotesbg.jpg');
+            background-size: cover;
+            background-position: center; /* Center the background */
+            filter: blur(5px); /* Stronger blur effect */
+            z-index: -1; /* Send background behind other content */
+        }
+
+        /* Header styles with transparency */
+        h1 {
+            background-color: rgba(171, 165, 165, 0.5); /* Semi-transparent grey background */
+            color: white; /* Text color */
+            padding: 10px; /* Padding for spacing */
+            border-radius: 10px; /* Rounded corners */
+            display: inline-block; /* Adjust display for better alignment */
+            margin-bottom: 20px; /* Space below the header */
+            font-size: 36px; /* Increase header font size */
+        }
+
+        /* Quote container styles */
+        .quote-container {
+            background-color: rgba(255, 105, 180, 0.7); /* Semi-transparent pink */
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 600px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5); /* Shadow effect */
+            opacity: 0; /* Start hidden */
+            animation: fadeIn 0.5s forwards; /* Fade-in animation */
+            position: relative; /* Context for positioning */
+            z-index: 1; /* Bring the container above the background */
+        }
+
+        /* Quote text styling */
+        .quote {
+            font-size: 24px; /* Increase quote font size */
+            text-align: center; /* Center align text */
+            margin: 10px 0; /* Add margin above and below quote */
+        }
+
+        /* Author text styling */
+        .author {
+            margin-top: 10px;
+            font-style: italic;
+            font-weight: bold;
+            font-size: 22px; /* Increase author font size */
+            text-align: right; /* Center align text */
+        }
+
+        .back-button, .next-button {
+            display: inline-block;
+            margin-top: 20px;
+            margin-right: 20px;
+            padding: 10px 20px;
+            background-color: #ff69b4; /* Pink button */
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s, transform 0.2s; /* Button hover effect */
+        }
+
+        .back-button:hover, .next-button:hover {
+            background-color: #ff1493; /* Darker pink on hover */
+            transform: scale(1.05); /* Scale effect on hover */
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <audio id="background-audio" preload="auto">
+        <source src="{{ url_for('static', filename='quotebgm.mp3') }}" type="audio/mp3">
+        Your browser does not support the audio element.
+    </audio>
+    
+    <div class="background"></div> <!-- Blurred background -->
+
+    <h1>Beautiful Love Quotes</h1>
+
+    <div class="quote-container">
+        <div class="quote">{{ quote[0] }}</div>
+        <div class="author">  -- {{ quote[1] }}</div>
+    </div>
+    
+    <a href="/main" class="back-button">Back to Confession</a>
+    <a href="{{ url_for('quotes') }}" class="next-button" onclick="playAudio()">Next Quote</a>
+    <a href="/logout" class="back-button">Log Out</a>
+
+
+    <h1 style="margin-top: 50px; color: white; font-size: 18px;">
+        Thank you for visiting our website! We hope you found inspiration and joy in our collection of love quotes. Your presence means a lot to us. Come back soon for more heartfelt content!
+    </h1>
+    
+
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            var audio = document.getElementById('background-audio');
+            audio.load(); // Preload audio
+        });
+
+        function playAudio() {
+            var audio = document.getElementById('background-audio');
+            audio.play().catch(function(error) {
+                console.error("Error trying to play audio:", error);
+            });
+        }
+    </script>
+</body>
+</html>

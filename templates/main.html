@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LoveMail - Confession Page</title>
+    <style>
+        body {
+            background-image: url('/static/mainbg.jpg'); /* Background image */
+            background-size: cover;
+            background-position: center;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+        /* Blurred background effect */
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: inherit;
+            background-size: cover;
+            background-position: center;
+            filter: blur(8px);
+            z-index: -1;
+        }
+        .confession-container {
+            background-color: rgba(255, 182, 193, 0.9); /* Light pink with transparency */
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+            width: 400px;
+            text-align: center;
+            animation: fadeIn 1s ease-in-out; /* Animation for fade-in effect */
+        }
+        h2 {
+            color: #ff69b4;
+            margin-bottom: 20px;
+            font-size: 24px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+        }
+        input[type="text"], input[type="email"], textarea {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #ff69b4;
+            border-radius: 10px;
+            box-sizing: border-box;
+            font-size: 16px;
+            transition: box-shadow 0.3s ease, border-color 0.3s ease; /* Added border-color transition */
+        }
+        input[type="text"]:focus, input[type="email"]:focus, textarea:focus {
+            outline: none;
+            box-shadow: 0 0 8px #ff69b4;
+            border-color: #ff69b4; /* Change border color on focus */
+        }
+        textarea {
+            resize: none; /* Disable resizing */
+            height: 100px; /* Set height for textarea */
+        }
+        input[type="submit"] {
+            background-color: #ff69b4;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 18px;
+            transition: background-color 0.3s ease, transform 0.2s ease; /* Added transform effect */
+        }
+        input[type="submit"]:hover {
+            background-color: #ff1493;
+            transform: scale(1.05); /* Slightly enlarge on hover */
+        }
+        /* Smooth fade-in effect */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+    <div class="confession-container">
+        <h2>Send Your Love Confession</h2>
+        <form action="/main" method="POST">
+            <input type="text" name="sender_name" placeholder="Your Name" required><br>
+            <input type="email" name="receiver_email" placeholder="Recipient's Email" required><br>
+            <input type="text" name="receiver_name" placeholder="Recipient's Name" required><br>
+            <textarea name="message" placeholder="Your confession message..." required></textarea><br>
+            <input type="submit" value="Send Confession">
+        </form>
+        
+    </div>
+</body>
+</html>
