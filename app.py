@@ -5,13 +5,18 @@ import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 import random
+import os
+from dotenv import load_dotenv
 
+load_dotenv()
 
 app = Flask(__name__)
-app.secret_key = 'your_secret_key'
 
-# MongoDB configuration
-app.config['MONGO_URI'] = "mongodb+srv://vedant:vedant@portfolio.e8ky0.mongodb.net/lovemail"
+# Set secret key and MongoDB URI from environment variables
+app.secret_key = os.getenv('SECRET_KEY')
+app.config['MONGO_URI'] = os.getenv('MONGO_URI')
+
+# Initialize PyMongo
 mongo = PyMongo(app)
 
 poems = [
@@ -204,8 +209,8 @@ def main():
 
 
         # Email-sending logic
-        sender_email = "love.mail.000000@gmail.com"  # Replace with your email
-        sender_password = "gobb lgvl adib jnsc"  # Replace with your email password
+        sender_email = os.getenv('EMAIL_SENDER')
+        sender_password = os.getenv('EMAIL_PASSWORD') 
         subject = "A Love Confession for You ❤️"
 
         try:
@@ -399,6 +404,12 @@ def quotes():
     current_quote = quote_list[session['current_index']]
 
     return render_template('quotes.html', quote=current_quote)
+
+@app.route('/logout')
+def logout():
+    # Clear the session data
+    session.clear()
+    return redirect(url_for('index')) 
 
 if __name__ == '__main__':
     app.run(debug=True)
