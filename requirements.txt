@@ -1,7 +1,6 @@
 Flask
 Flask-PyMongo
-Werkzeug
 python-dotenv
-pymongo[srv]
-email-validator
+Werkzeug
 dnspython
+pymongo
