@@ -1,6 +1,4 @@
 Flask
 Flask-PyMongo
 python-dotenv
-Werkzeug
-smtplib-client
-email-validator
+Werkzeu
